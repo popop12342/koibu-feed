@@ -1,8 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
-from argparse import ArgumentParser
 
-def find_active_capains():
+def find_active_campaigns():
     base_url = 'https://regalgoblins.fandom.com'
     response = requests.get(base_url + '/wiki/Arcadia_Wiki')
     soup = BeautifulSoup(response.content, 'html.parser')
@@ -20,7 +19,15 @@ def find_active_capains():
 
     return titles, urls
 
-if __name__ == '__main__':
-    titles, urls = find_active_capains()
-    print(titles)
-    print(urls)
+def is_episode(element):
+    if 'style' in str(element):
+        return 'width:100%' in element['style']
+    return False
+
+def get_episodes(campaign_url):
+    response = requests.get(campaign_url)
+    soup = BeautifulSoup(response.content, 'html.parser')
+
+    children = soup.article.div.div.div.div.children
+    episodes = filter(is_episode, children)
+    return episodes
