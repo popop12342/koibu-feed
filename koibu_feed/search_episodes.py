@@ -28,6 +28,12 @@ def get_episodes(campaign_url):
     response = requests.get(campaign_url)
     soup = BeautifulSoup(response.content, 'html.parser')
 
-    children = soup.article.div.div.div.div.children
-    episodes = filter(is_episode, children)
+    chapters = soup.find_all('div', class_='mw-collapsible-content')
+    episodes = []
+    if len(chapters) > 1:
+        for chapter in chapters:
+            episodes.extend(filter(is_episode, chapter))
+    else:
+        children = soup.article.div.div.div.div.children
+        episodes = filter(is_episode, children)
     return episodes

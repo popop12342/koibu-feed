@@ -17,7 +17,10 @@ class Episode:
         
         title_a = main_episode_info.contents[0]
         title = str(title_a.string)
-        wiki_link = base_url + title_a['href']
+        try:
+            wiki_link = base_url + title_a['href']
+        except TypeError:
+            wiki_link = None
 
         return Episode(title, wiki_link)
 
