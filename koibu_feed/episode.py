@@ -8,8 +8,29 @@ class Episode:
         self.twitch_link = twitch_link
         self.reddit_link = reddit_link
 
+    def print_episode_info(self):
+        print(self.title)
+        if self.wiki_link:
+            print('Wiki    - ', self.wiki_link)
+        if self.youtube_link:
+            print('Youtube - ', self.youtube_link)
+        if self.twitch_link:
+            print('Twitch  - ', self.twitch_link)
+        if self.reddit_link:
+            print('Reddit  - ', self.reddit_link)
+
     def __str__(self):
-        return f'Episode[title={self.title}, wiki_link={self.wiki_link}]'
+        s = f'Episode[title={self.title}'
+        if self.wiki_link:
+            s += ',wiki_link=' + self.wiki_link
+        if self.youtube_link:
+            s += ',youtube_link=' + self.youtube_link
+        if self.twitch_link:
+            s += ',twitch_link=' + self.twitch_link
+        if self.reddit_link:
+            s += ',reddit_link=' + self.reddit_link
+        s += ']'
+        return s
 
     @staticmethod
     def from_soup(episode_div):
@@ -22,6 +43,14 @@ class Episode:
         except TypeError:
             wiki_link = None
 
-        return Episode(title, wiki_link)
+        other_links = [a['href'] for a in main_episode_info.find_all('a')]
+        youtube_link = _filter_links(other_links, 'youtube.com')
+        twitch_link = _filter_links(other_links, 'twitch.tv')
+        reddit_link = _filter_links(other_links, 'reddit.com')
 
-        
+        return Episode(title, wiki_link, youtube_link, twitch_link, reddit_link)
+
+def _filter_links(links, substring):
+    links = list(filter(lambda link: substring in link, links))
+    if links:
+        return links[0]

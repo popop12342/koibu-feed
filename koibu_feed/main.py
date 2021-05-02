@@ -12,7 +12,7 @@ def main(args):
         episodes = get_episodes(urls[idx])
         episodes = [Episode.from_soup(ep) for ep in episodes]
         for episode in episodes:
-            print(episode)
+            episode.print_episode_info()
 
 
 if __name__ == '__main__':
