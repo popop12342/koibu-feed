@@ -32,4 +32,4 @@ if __name__ == '__main__':
     parser.add_argument('-ed', '--episode_data', help='CSV file with the watched episode number', default='../data/current_episode.csv')
     args = parser.parse_args()
 
-    main(args)    
+    main(args)
