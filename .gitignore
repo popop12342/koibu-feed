@@ -185,3 +185,6 @@ Thumbs.db
 *.code-workspace
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,vscode,python
+
+data/*
+!data/sample_episode_file.csv

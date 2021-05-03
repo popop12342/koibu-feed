@@ -18,3 +18,13 @@ Run main.py file and choose the name of the campaign you want to search.
 cd koibu_feed
 python main.py -c "Tombs of Scoria"
 ```
+
+To mark the current episode you are currently watching use the
+[`sample_episode_file.csv`](data/sample_episode_file.csv) file. On each line
+add the campaign title and episode number separated by a comma.
+
+To use a different file use
+
+```bash
+python main.py -c "Tombs of Scoria" -ed "../data/sample_episode_file.csv"
+```
