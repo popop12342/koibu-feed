@@ -8,7 +8,7 @@ def main(args):
     titles, urls = find_active_campaigns()
     titles_lower = [t.lower() for t in titles]
     if args.campaign.lower() in titles_lower:
-        idx = titles_lower.index(args.campaign)
+        idx = titles_lower.index(args.campaign.lower())
         episodes = get_episodes(urls[idx])
         episodes = [Episode.from_soup(ep) for ep in episodes]
         episode_number = get_episode_watched(args.campaign, args.episode_data)
