@@ -37,3 +37,8 @@ def get_episodes(campaign_url):
         children = soup.article.div.div.div.div.children
         episodes = filter(is_episode, children)
     return episodes
+
+def get_url_for(campaign):
+    base_url = 'https://regalgoblins.fandom.com'
+    campaign_uri = '_'.join(campaign.split())
+    return base_url + '/wiki/' + campaign_uri

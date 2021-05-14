@@ -1,4 +1,5 @@
 from argparse import ArgumentParser
+from search_episodes import get_episodes, get_url_for
 
 
 def get_current_episodes(episode_data_file):
@@ -21,6 +22,8 @@ def print_current_episodes_info(episodes):
         print('   {:20} - {}'.format(campaign, number))
 
 def set_current_episode(campaign, episode_number, episode_data_file):
+    if not episode_number:
+        episode_number = len(list(get_episodes(get_url_for(campaign))))
     episodes = get_current_episodes(episode_data_file)
     episodes[campaign] = episode_number
     print_current_episodes_info(episodes)

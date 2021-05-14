@@ -32,5 +32,11 @@ python main.py -c "Tombs of Scoria" -ed "../data/sample_episode_file.csv"
 To set the current episodes on the command line use
 
 ```bash
+python set_current_episode.py -c "Tombs of Scoria" -ed "../data/sample_episode_file.csv"
+```
+
+Or choose a episode number to set
+
+```bash
 python set_current_episode.py -c "Tombs of Scoria" -n 32 -ed "../data/sample_episode_file.csv"
 ```
