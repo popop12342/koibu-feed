@@ -20,9 +20,12 @@ def find_active_campaigns():
     return titles, urls
 
 def is_episode(element):
-    if 'style' in str(element):
-        return 'width:100%' in element['style']
-    return False
+    try:
+        if 'style' in str(element):
+            return 'width:100%' in element['style']
+        return False
+    except:
+        return False
 
 def get_episodes(campaign_url):
     response = requests.get(campaign_url)
@@ -34,7 +37,7 @@ def get_episodes(campaign_url):
         for chapter in chapters:
             episodes.extend(filter(is_episode, chapter))
     else:
-        children = soup.article.div.div.div.div.children
+        children = soup.find('div', class_='mw-parser-output').children
         episodes = filter(is_episode, children)
     return episodes
 
