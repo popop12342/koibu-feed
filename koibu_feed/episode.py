@@ -12,15 +12,17 @@ class Episode:
         print(self.title)
         if self.wiki_link:
             print('Wiki    - ', self.wiki_link)
-        if self.youtube_link:
-            for idx, link in enumerate(self.youtube_link):
-                print(f'Youtube {idx+1} - ', link)
-        if self.twitch_link:
-            for idx, link in enumerate(self.twitch_link):
-                print(f'Twitch {idx+1}  - ', link)
-        if self.reddit_link:
-            for idx, link in enumerate(self.reddit_link):
-                print(f'Reddit {idx+1}  - ', link)
+        self._print_list_info(self.youtube_link, 'Youtube')
+        self._print_list_info(self.twitch_link, 'Twitch')
+        self._print_list_info(self.reddit_link, 'Reddit')
+
+    def _print_list_info(self, l, name):
+        if l:
+            if len(l) > 1:
+                for idx, link in enumerate(l):
+                    print(f'{name} {idx+1} - ', link)
+            else:
+                print(name, ' - ', l[0])
 
     def __str__(self):
         s = f'Episode[title={self.title}'
