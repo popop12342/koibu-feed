@@ -11,18 +11,20 @@ class Episode:
     def print_episode_info(self):
         print(self.title)
         if self.wiki_link:
-            print('Wiki    - ', self.wiki_link)
+            print('Wiki      - ', self.wiki_link)
         self._print_list_info(self.youtube_link, 'Youtube')
         self._print_list_info(self.twitch_link, 'Twitch')
         self._print_list_info(self.reddit_link, 'Reddit')
+        print()
 
     def _print_list_info(self, l, name):
         if l:
             if len(l) > 1:
                 for idx, link in enumerate(l):
-                    print(f'{name} {idx+1} - ', link)
+                    name_idx = name + ' ' + str(idx+1)
+                    print('{:9} - {}'.format(name_idx, link))
             else:
-                print(name, ' - ', l[0])
+                print('{:9} - {}'.format(name, l[0]))
 
     def __str__(self):
         s = f'Episode[title={self.title}'
